@@ -1,0 +1,15 @@
+name = "korkovahti"
+main = "worker.js"
+compatibility_date = "2026-09-01"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+[ai]
+binding = "AI"
+
+[vars]
+# Any Workers AI text model. Models are retired over time; if the chat stops
+# answering, pick a current one from https://developers.cloudflare.com/workers-ai/models/
+MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"

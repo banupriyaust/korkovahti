@@ -1,0 +1,658 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Euribor for home-loan borrowers in Finland and the euro area: history, current level, what markets expect, and what it means for your monthly payment."><style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style><title>Korkovahti</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: full-width bands alternating white and soft grey, one centred column, a hero with a single large figure. */
+:root{
+  --bg:#ffffff; --bg2:#f5f5f7; --cardA:#f5f5f7; --cardB:#ffffff; --fieldA:#ffffff; --fieldB:#f0f0f3;
+  --ink:#1d1d1f; --ink2:#515154; --muted:#6e6e73; --line:#e3e3e8; --axis:#c7c7cc;
+  --accent:#0071e3; --accent-ink:#ffffff; --wash:#ececf0; --seg:#e3e3e8; --segOn:#ffffff;
+  --nav:rgba(255,255,255,.72); --shadow:0 12px 40px rgba(0,0,0,.08);
+  --s1:#2a78d6; --s2:#eb6834; --band:rgba(42,120,214,.14);
+  --body:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Inter','Segoe UI',system-ui,sans-serif;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --bg2:#0d0d0f; --cardA:#161617; --cardB:#1c1c1e; --fieldA:#2a2a2d; --fieldB:#2a2a2d;
+    --ink:#f5f5f7; --ink2:#b0b0b6; --muted:#86868b; --line:#2c2c2e; --axis:#48484a;
+    --accent:#2997ff; --accent-ink:#ffffff; --wash:#2a2a2d; --seg:#2a2a2d; --segOn:#5a5a5f;
+    --nav:rgba(0,0,0,.72); --shadow:0 12px 40px rgba(0,0,0,.5);
+    --s1:#3987e5; --s2:#d95926; --band:rgba(57,135,229,.22); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --bg2:#0d0d0f; --cardA:#161617; --cardB:#1c1c1e; --fieldA:#2a2a2d; --fieldB:#2a2a2d;
+  --ink:#f5f5f7; --ink2:#b0b0b6; --muted:#86868b; --line:#2c2c2e; --axis:#48484a;
+  --accent:#2997ff; --accent-ink:#ffffff; --wash:#2a2a2d; --seg:#2a2a2d; --segOn:#5a5a5f;
+  --nav:rgba(0,0,0,.72); --shadow:0 12px 40px rgba(0,0,0,.5);
+  --s1:#3987e5; --s2:#d95926; --band:rgba(57,135,229,.22); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2{margin:0;text-wrap:balance;letter-spacing:-.025em;line-height:1.06}
+h1{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:700}
+h2{font-size:clamp(2rem,4.6vw,3rem);font-weight:600}
+p{margin:0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.fi{color:var(--muted);font-style:italic}
+.num{font-variant-numeric:tabular-nums}
+button,select,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:2px}
+
+nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--nav);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+nav.top .inner{display:flex;align-items:center;justify-content:space-between;gap:16px;height:48px}
+nav.top .mark{font-weight:600;font-size:1.05rem;letter-spacing:-.01em;color:var(--ink)}
+nav.top .links{display:flex;gap:28px;font-size:.8rem}
+nav.top .links a{color:var(--ink2);transition:color .2s}
+nav.top .links a:hover{color:var(--ink);text-decoration:none}
+nav.top .love{font-size:.8rem;font-weight:500;color:var(--ink);background:var(--wash);border-radius:999px;padding:6px 13px;white-space:nowrap;transition:transform .2s var(--ease),filter .2s}
+nav.top .love:hover{text-decoration:none;filter:brightness(.96)}
+nav.top .love:hover .heart{transform:scale(1.25)}
+.heart{display:inline-block;color:#ff375f;transition:transform .25s var(--ease)}
+footer .copy{margin-top:10px;padding-top:16px;border-top:1px solid var(--line);color:var(--ink2)}
+
+.inner{max-width:1024px;margin-inline:auto;padding-inline:22px}
+.band{--card:var(--cardA);--field:var(--fieldA);--surface:var(--cardA);background:var(--bg);padding-block:clamp(64px,10vw,128px);scroll-margin-top:48px}
+.band.alt{--card:var(--cardB);--field:var(--fieldB);--surface:var(--cardB);background:var(--bg2)}
+.band > .inner{display:flex;flex-direction:column;gap:40px}
+.head{display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center}
+.eyebrow{font-size:.95rem;font-weight:600;color:var(--accent)}
+.lede{font-size:clamp(1.1rem,2.2vw,1.35rem);line-height:1.4;color:var(--ink2);max-width:40em;text-wrap:balance}
+.sub{font-size:.82rem;color:var(--muted);line-height:1.45}
+.center{text-align:center;margin-inline:auto;max-width:56em}
+
+.hero{padding-block:clamp(56px,9vw,112px) clamp(48px,7vw,88px);text-align:center}
+.hero .inner{display:flex;flex-direction:column;align-items:center;gap:22px}
+.hero .big{font-size:clamp(4.4rem,17vw,10rem);font-weight:600;letter-spacing:-.045em;line-height:1;margin-top:10px}
+.hero .big small{font-size:.32em;font-weight:500;letter-spacing:-.02em;color:var(--muted);margin-left:.12em}
+.hero .cap{font-size:1.05rem;color:var(--ink2)}
+.cta{display:flex;flex-wrap:wrap;gap:12px 22px;justify-content:center;align-items:center}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);border:0;border-radius:999px;padding:11px 22px;font-weight:500;cursor:pointer;transition:transform .2s var(--ease),filter .2s}
+.btn:hover{filter:brightness(1.08);text-decoration:none}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:var(--wash);color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:default}
+.more::after{content:" ›"}
+.pick{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:center;font-size:.95rem;color:var(--ink2)}
+.pick select{background:var(--wash);border:0;border-radius:999px;padding:8px 14px}
+.note{font-size:.95rem;color:var(--ink2);max-width:44em;text-wrap:balance}
+
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.tile{display:flex;flex-direction:column;gap:4px;text-align:left;background:var(--card);border:0;border-radius:22px;padding:22px 22px 20px;cursor:pointer;min-width:0;transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.tile:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.tile[aria-pressed=true]{box-shadow:inset 0 0 0 2px var(--accent)}
+.tile .t{font-size:.8rem;font-weight:600;color:var(--muted)}
+.tile .v{font-size:clamp(1.8rem,3.4vw,2.5rem);font-weight:600;letter-spacing:-.03em;line-height:1.1}
+.tile .v small{font-size:.5em;font-weight:500;color:var(--muted)}
+.tile .d{font-size:.8rem;color:var(--ink2)}
+
+.card{background:var(--card);border-radius:24px;padding:clamp(18px,3vw,30px);display:flex;flex-direction:column;gap:16px;min-width:0}
+.bar{display:flex;flex-wrap:wrap;gap:10px 16px;justify-content:space-between;align-items:center}
+.legend{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:.84rem;color:var(--ink2)}
+.legend i{display:inline-block;width:16px;height:0;border-top:2px solid;vertical-align:middle;margin-right:7px;border-radius:2px}
+.legend i.dash{border-top-style:dashed}
+.legend i.box{height:10px;border:0;background:var(--band);border-radius:3px}
+.seg{display:inline-flex;background:var(--seg);border-radius:10px;padding:2px;gap:2px}
+.seg button{background:transparent;border:0;border-radius:8px;padding:6px 14px;font-size:.84rem;font-weight:500;cursor:pointer;color:var(--ink);transition:background .25s var(--ease),box-shadow .25s}
+.seg button[aria-pressed=true]{background:var(--segOn);box-shadow:0 1px 4px rgba(0,0,0,.14)}
+.chart{position:relative;min-width:0}
+.chart svg{display:block;width:100%;height:auto;touch-action:pan-y}
+.chart text{font-family:var(--body);font-size:11px;fill:var(--muted);font-variant-numeric:tabular-nums}
+.tip{position:absolute;top:4px;pointer-events:none;background:var(--bg);border-radius:12px;padding:8px 12px;font-size:.8rem;line-height:1.45;white-space:nowrap;box-shadow:var(--shadow)}
+.tip b{display:block;font-weight:600}
+.tip i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+details summary{cursor:pointer;font-size:.88rem;color:var(--accent)}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;font-size:.9rem;width:100%}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+th:first-child,td:first-child{text-align:left}
+th{font-weight:500;color:var(--muted);font-size:.8rem}
+td small{display:block;color:var(--muted);font-size:.78rem;white-space:normal}
+
+.outlook{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:14px;align-items:stretch}
+.steps{display:flex;flex-direction:column}
+.steps div{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.steps div:last-child{border-bottom:0}
+.steps span{color:var(--ink2);font-size:.95rem}
+.steps small{display:block;color:var(--muted);font-size:.76rem}
+.steps b{font-size:1.25rem;font-weight:600;letter-spacing:-.02em}
+
+.calc{display:grid;grid-template-columns:320px minmax(0,1fr);gap:14px;align-items:start}
+.form label{display:flex;flex-direction:column;gap:6px;font-size:.84rem;color:var(--ink2)}
+.form input,.form select,.ask textarea{width:100%;background:var(--field);border:1px solid transparent;border-radius:12px;padding:11px 14px;min-width:0;transition:border-color .2s,box-shadow .2s}
+.form input:focus,.form select:focus,.ask textarea:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
+.form .seg{align-self:stretch}
+.form .seg button{flex:1;padding-inline:8px}
+.result{display:flex;flex-direction:column;gap:18px;min-width:0}
+.headline{font-size:clamp(1.4rem,2.8vw,2rem);font-weight:600;letter-spacing:-.022em;line-height:1.2;text-wrap:balance}
+.headline b{color:var(--accent);font-weight:600}
+
+.chatcard{max-width:760px;width:100%;margin-inline:auto}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{background:var(--wash);border:0;border-radius:999px;padding:8px 15px;font-size:.86rem;cursor:pointer;color:var(--ink);text-align:left;transition:transform .2s var(--ease),filter .2s}
+.chips button:hover{filter:brightness(.96)}
+.chips button:active{transform:scale(.97)}
+.msgs{display:flex;flex-direction:column;gap:10px}
+.msg{max-width:min(72ch,88%);white-space:pre-wrap;overflow-wrap:anywhere;padding:10px 15px;border-radius:20px;animation:pop .35s var(--ease)}
+.msg.u{align-self:flex-end;background:var(--accent);color:var(--accent-ink);border-bottom-right-radius:6px}
+.msg.a{align-self:flex-start;background:var(--wash);border-bottom-left-radius:6px}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}}
+.ask{display:flex;gap:8px;align-items:flex-end}
+.ask textarea{flex:1;resize:vertical;min-height:46px}
+
+footer{background:var(--bg2);border-top:1px solid var(--line);padding-block:28px 48px;font-size:.78rem;color:var(--muted);line-height:1.5}
+footer .inner{display:flex;flex-direction:column;gap:10px}
+footer b{color:var(--ink2);font-weight:600}
+
+.reveal{opacity:.3;transform:translateY(28px)}
+.reveal.in{opacity:1;transform:none;transition:opacity .9s var(--ease),transform .9s var(--ease)}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+  .tile,.btn,.msg{transition:none;animation:none}
+}
+@media (max-width:820px){
+  nav.top .links{display:none}
+  .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .outlook,.calc{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+
+</head><body><div class="wrap">
+  <nav class="top" aria-label="Sections">
+    <div class="inner">
+      <a class="mark" href="#top">Korkovahti</a>
+      <div class="links">
+        <a href="#rates">Rates</a><a href="#past">History</a><a href="#outlook">Outlook</a><a href="#loan">Your loan</a><a href="#ask">Ask</a>
+      </div>
+      <a class="love" href="https://www.linkedin.com/in/banupriya-selvaraj" target="_blank" rel="noopener"><span class="heart" aria-hidden="true">♥</span> Love my work? Message me</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="inner">
+      <h1>Euribor, made clear.</h1>
+      <p class="lede">Where it has been, where it stands, and what markets expect next. Then what all of it means for your monthly payment.</p>
+      <div class="big num" id="heroRate"></div>
+      <p class="cap" id="heroCap"></p>
+      <div class="cta">
+        <a class="btn" href="#loan">Calculate my payment</a>
+        <a class="more" href="#outlook">See what markets expect</a>
+      </div>
+      <div class="pick">
+        <label for="country">My loan is in</label>
+        <select id="country">
+          <option value="fi">Finland</option>
+          <option value="es">Spain</option>
+          <option value="pt">Portugal</option>
+          <option value="it">Italy</option>
+          <option value="at">Austria</option>
+          <option value="xx">Another euro-area country</option>
+        </select>
+      </div>
+      <p class="note" id="countryNote"></p>
+    </div>
+  </header>
+
+  <section class="band alt" id="rates">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">Rates</p>
+        <h2>Four maturities. Pick yours.</h2>
+        <p class="lede">Your choice drives the charts and the calculator below.</p>
+      </div>
+      <div class="tiles" id="tiles"></div>
+      <p class="sub center" id="tilesSub"></p>
+    </div>
+  </section>
+
+  <section class="band" id="past">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">History</p>
+        <h2>Twenty-seven years in one line.</h2>
+        <p class="lede">The monthly average next to the ECB deposit rate, the policy rate Euribor follows most closely.</p>
+      </div>
+      <div class="card">
+        <div class="bar">
+          <div class="legend" id="histLegend"></div>
+          <div class="seg" id="ranges" role="group" aria-label="Time range">
+            <button data-r="24">2 y</button><button data-r="60">5 y</button><button data-r="120">10 y</button><button data-r="0">All</button>
+          </div>
+        </div>
+        <div class="chart" id="histChart"></div>
+        <details>
+          <summary>Yearly averages as a table</summary>
+          <div class="scroll"><table id="yearTable"></table></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="outlook">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">Outlook</p>
+        <h2>What markets expect.</h2>
+        <p class="lede">Nobody can forecast Euribor reliably. This is what investors are pricing in today. It moves every day and has often been wrong.</p>
+      </div>
+      <div class="outlook">
+        <div class="card">
+          <div class="legend" id="outLegend"></div>
+          <div class="chart" id="outChart"></div>
+        </div>
+        <div class="card">
+          <div class="steps" id="steps"></div>
+        </div>
+      </div>
+      <p class="sub center">The shaded range is the middle half of how far this rate actually moved over the same horizon in the past (1999 to today), centred on the market path. Half of the time the real outcome fell outside it.</p>
+    </div>
+  </section>
+
+  <section class="band" id="loan">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">Your loan</p>
+        <h2>See your next payment.</h2>
+        <p class="lede">Example figures are filled in. Replace them with your own. They stay in your browser unless you ask a question below, which sends them along with it.</p>
+      </div>
+      <div class="calc">
+        <div class="card form">
+          <div class="seg" id="mode" role="group" aria-label="Loan situation">
+            <button data-m="existing">I have a loan</button><button data-m="new">New loan</button>
+          </div>
+          <label for="amount"><span id="amountLbl">Remaining balance (€)</span>
+            <input id="amount" type="number" inputmode="decimal" min="1000" step="1000" value="180000"></label>
+          <label for="years"><span id="yearsLbl">Years left</span>
+            <input id="years" type="number" inputmode="decimal" min="1" max="45" step="1" value="20"></label>
+          <label for="margin"><span>Bank margin, % <span class="fi">marginaali</span></span>
+            <input id="margin" type="number" inputmode="decimal" min="0" max="5" step="0.05" value="0.75"></label>
+          <label for="tenorSel"><span>Reference rate <span class="fi">viitekorko</span></span>
+            <select id="tenorSel"></select></label>
+          <label for="reset" id="resetWrap"><span>Next rate reset <span class="fi">koronmääräytymispäivä</span></span>
+            <select id="reset"></select></label>
+          <label for="ref" id="refWrap"><span>Euribor fixed at your last reset, %</span>
+            <input id="ref" type="number" inputmode="decimal" step="0.001" value="0">
+            <span class="sub" id="refHint"></span></label>
+        </div>
+        <div class="result">
+          <p class="headline" id="headline"></p>
+          <div class="card"><div class="scroll"><table id="payTable"></table></div></div>
+          <p class="sub" id="calcNote"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="ask">
+    <div class="inner">
+      <div class="head">
+        <p class="eyebrow">Ask</p>
+        <h2>Questions, answered.</h2>
+        <p class="lede">An AI assistant answers from the figures on this page and your loan inputs above. It explains; it does not give financial advice, and it can be wrong.</p>
+      </div>
+      <div class="card chatcard">
+        <div class="chips" id="chips"></div>
+        <div class="msgs" id="msgs" aria-live="polite"></div>
+        <form class="ask" id="askForm">
+          <textarea id="q" rows="1" placeholder="Ask about Euribor or your loan" aria-label="Your question" disabled></textarea>
+          <button class="btn" id="send" type="submit" disabled>Ask</button>
+          <button class="btn ghost" id="stop" type="button" hidden>Stop</button>
+        </form>
+        <p class="sub" id="askStatus">Connecting…</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="inner">
+      <p class="num" id="stamp"></p>
+      <p><b>Sources.</b> Monthly Euribor averages, the deposit facility rate and the yield curve: <a href="https://data.ecb.europa.eu" target="_blank" rel="noopener">ECB Data Portal</a>. All of it is published by the ECB for free reuse; this page does not show daily Euribor fixings. Euribor is administered by the European Money Markets Institute (EMMI).</p>
+      <p><b>How the outlook is built.</b> Forward rates are computed from the ECB's AAA government-bond yield curve (Svensson model) and shifted by the gap between that curve and Euribor, measured over the latest full month. The same method gives the "today" estimate, which can differ from the official fixing by up to about a tenth of a point. It approximates what Euribor futures price; it is not a forecast by this site. Beyond two or three years the path also carries the extra yield investors ask for holding longer bonds, so it tends to sit higher than what they truly expect.</p>
+      <p><b>Loan maths.</b> Annuity loan <span class="fi">(annuiteettilaina)</span>: the payment is recalculated at each reset from the remaining balance and term. Your bank's rounding, fees, interest caps and repayment type can change the result.</p>
+      <p>For information only. Not financial advice. Check your loan agreement and talk to your bank before deciding anything.</p>
+      <p class="copy">© <span id="yr">2026</span> Banupriya Selvaraj. All rights reserved. Made with <span class="heart" aria-label="love">♥</span> in Finland. <a href="https://www.linkedin.com/in/banupriya-selvaraj" target="_blank" rel="noopener">Message me on LinkedIn</a></p>
+    </div>
+  </footer>
+</div>
+
+<script>
+const D = {"start":"1999-01","lastMonth":"2026-09","series":{"m1":[3.158,3.126,3.055,2.695,2.566,2.605,2.635,2.614,2.584,2.763,3.061,3.509,3.15,3.359,3.589,3.791,4.163,4.37,4.408,4.574,4.698,4.854,4.925,4.948,4.805,4.8,4.776,4.78,4.663,4.53,4.525,4.465,4.051,3.719,3.427,3.418,3.348,3.336,3.346,3.336,3.374,3.384,3.361,3.333,3.317,3.306,3.231,2.98,2.855,2.775,2.601,2.576,2.52,2.177,2.131,2.122,2.126,2.1,2.087,2.131,2.076,2.061,2.043,2.052,2.061,2.076,2.076,2.077,2.078,2.086,2.11,2.167,2.111,2.104,2.103,2.105,2.104,2.104,2.106,2.113,2.115,2.121,2.223,2.411,2.388,2.459,2.633,2.649,2.693,2.869,2.939,3.094,3.157,3.35,3.421,3.64,3.616,3.651,3.844,3.859,3.919,4.098,4.105,4.308,4.434,4.236,4.216,4.711,4.197,4.182,4.305,4.369,4.387,4.472,4.472,4.487,4.66,4.831,3.843,2.993,2.142,1.628,1.269,1.012,0.884,0.913,0.61,0.508,0.455,0.43,0.435,0.478,0.437,0.421,0.406,0.405,0.423,0.446,0.583,0.64,0.618,0.784,0.834,0.811,0.793,0.894,0.903,1.127,1.243,1.279,1.422,1.373,1.347,1.363,1.227,1.143,0.836,0.626,0.467,0.409,0.394,0.38,0.219,0.132,0.119,0.111,0.108,0.111,0.113,0.12,0.118,0.118,0.112,0.121,0.125,0.128,0.128,0.128,0.132,0.214,0.224,0.224,0.232,0.253,0.259,0.153,0.096,0.085,0.018,0.008,0.01,0.023,0.005,0.0,-0.01,-0.029,-0.049,-0.063,-0.071,-0.088,-0.105,-0.116,-0.14,-0.19,-0.223,-0.246,-0.308,-0.341,-0.348,-0.356,-0.369,-0.37,-0.371,-0.371,-0.373,-0.37,-0.371,-0.372,-0.372,-0.372,-0.373,-0.373,-0.373,-0.372,-0.372,-0.372,-0.372,-0.369,-0.369,-0.37,-0.371,-0.372,-0.371,-0.37,-0.37,-0.37,-0.371,-0.37,-0.369,-0.367,-0.366,-0.368,-0.367,-0.367,-0.369,-0.385,-0.395,-0.41,-0.448,-0.455,-0.45,-0.453,-0.457,-0.473,-0.478,-0.428,-0.464,-0.493,-0.509,-0.517,-0.522,-0.538,-0.541,-0.561,-0.562,-0.553,-0.553,-0.555,-0.558,-0.555,-0.556,-0.56,-0.558,-0.56,-0.565,-0.596,-0.565,-0.553,-0.544,-0.537,-0.546,-0.525,-0.306,0.022,0.574,0.915,1.423,1.724,1.981,2.369,2.71,2.961,3.152,3.343,3.469,3.627,3.758,3.861,3.841,3.858,3.869,3.868,3.853,3.853,3.816,3.635,3.618,3.597,3.438,3.205,3.066,2.89,2.792,2.606,2.401,2.243,2.094,1.929,1.892,1.89,1.897,1.906,1.906,1.915,1.961,1.952,1.933,1.971,1.957,2.146,2.214,2.221,2.414],"m3":[3.132,3.093,3.047,2.696,2.579,2.627,2.676,2.695,2.727,3.376,3.468,3.446,3.343,3.537,3.747,3.925,4.362,4.502,4.583,4.777,4.853,5.041,5.092,4.939,4.771,4.756,4.709,4.682,4.637,4.454,4.467,4.354,3.983,3.6,3.386,3.345,3.339,3.357,3.391,3.407,3.467,3.464,3.41,3.352,3.31,3.261,3.124,2.941,2.832,2.687,2.53,2.533,2.401,2.152,2.13,2.14,2.147,2.144,2.159,2.146,2.089,2.071,2.029,2.049,2.086,2.113,2.116,2.114,2.119,2.147,2.17,2.173,2.145,2.138,2.137,2.137,2.126,2.111,2.119,2.132,2.139,2.197,2.361,2.473,2.512,2.6,2.723,2.794,2.889,2.986,3.102,3.226,3.335,3.502,3.597,3.684,3.752,3.818,3.891,3.975,4.071,4.148,4.216,4.544,4.742,4.687,4.639,4.848,4.482,4.362,4.596,4.784,4.857,4.941,4.961,4.965,5.019,5.113,4.238,3.293,2.457,1.943,1.635,1.422,1.282,1.228,0.975,0.86,0.772,0.738,0.716,0.712,0.68,0.662,0.645,0.645,0.687,0.728,0.849,0.895,0.88,0.998,1.042,1.022,1.017,1.087,1.176,1.321,1.425,1.489,1.598,1.552,1.536,1.576,1.485,1.426,1.222,1.048,0.858,0.744,0.685,0.659,0.497,0.332,0.246,0.208,0.192,0.185,0.205,0.223,0.206,0.209,0.201,0.21,0.221,0.226,0.223,0.226,0.223,0.274,0.292,0.288,0.305,0.33,0.325,0.241,0.205,0.192,0.097,0.083,0.081,0.081,0.063,0.048,0.027,0.005,-0.01,-0.014,-0.019,-0.028,-0.037,-0.054,-0.088,-0.126,-0.146,-0.184,-0.229,-0.249,-0.257,-0.268,-0.295,-0.298,-0.302,-0.309,-0.313,-0.316,-0.326,-0.329,-0.329,-0.33,-0.329,-0.33,-0.33,-0.329,-0.329,-0.33,-0.329,-0.328,-0.328,-0.329,-0.328,-0.328,-0.325,-0.322,-0.321,-0.319,-0.319,-0.318,-0.316,-0.312,-0.308,-0.308,-0.309,-0.31,-0.312,-0.329,-0.365,-0.408,-0.418,-0.413,-0.401,-0.395,-0.391,-0.409,-0.417,-0.254,-0.272,-0.376,-0.444,-0.48,-0.491,-0.509,-0.521,-0.538,-0.547,-0.541,-0.539,-0.538,-0.54,-0.543,-0.545,-0.548,-0.545,-0.55,-0.567,-0.582,-0.56,-0.531,-0.495,-0.448,-0.386,-0.239,0.037,0.395,1.011,1.428,1.825,2.063,2.345,2.64,2.911,3.179,3.372,3.536,3.672,3.78,3.88,3.968,3.972,3.935,3.925,3.923,3.923,3.885,3.813,3.724,3.685,3.548,3.434,3.167,3.007,2.825,2.704,2.525,2.442,2.249,2.087,1.984,1.986,2.021,2.027,2.034,2.042,2.048,2.028,2.011,2.109,2.175,2.226,2.339,2.425,2.513,2.635],"m6":[3.091,3.04,3.025,2.704,2.598,2.68,2.897,3.053,3.107,3.457,3.484,3.512,3.556,3.735,3.936,4.083,4.544,4.681,4.837,5.011,5.038,5.103,5.131,4.92,4.675,4.666,4.577,4.566,4.558,4.353,4.387,4.225,3.876,3.459,3.262,3.256,3.342,3.398,3.5,3.536,3.626,3.59,3.484,3.38,3.27,3.168,3.037,2.892,2.758,2.578,2.451,2.469,2.308,2.084,2.093,2.172,2.178,2.173,2.224,2.199,2.115,2.086,2.019,2.061,2.136,2.188,2.188,2.169,2.2,2.191,2.217,2.206,2.192,2.185,2.192,2.172,2.144,2.107,2.135,2.16,2.167,2.272,2.5,2.6,2.651,2.725,2.872,2.956,3.058,3.158,3.288,3.41,3.527,3.645,3.728,3.789,3.89,3.944,3.996,4.097,4.197,4.283,4.359,4.594,4.751,4.663,4.63,4.819,4.501,4.356,4.593,4.795,4.897,5.088,5.148,5.16,5.219,5.178,4.295,3.365,2.539,2.034,1.775,1.608,1.48,1.436,1.213,1.115,1.042,1.017,0.993,0.996,0.977,0.965,0.952,0.955,0.982,1.012,1.104,1.147,1.137,1.224,1.269,1.251,1.254,1.352,1.483,1.621,1.707,1.749,1.818,1.755,1.736,1.776,1.706,1.671,1.505,1.345,1.164,1.04,0.97,0.935,0.779,0.606,0.484,0.412,0.36,0.324,0.344,0.362,0.329,0.324,0.299,0.321,0.336,0.342,0.34,0.342,0.327,0.371,0.396,0.387,0.407,0.43,0.417,0.333,0.305,0.292,0.2,0.184,0.182,0.176,0.152,0.126,0.097,0.073,0.057,0.049,0.049,0.044,0.035,0.02,-0.015,-0.04,-0.061,-0.115,-0.134,-0.138,-0.144,-0.162,-0.188,-0.189,-0.199,-0.207,-0.215,-0.218,-0.236,-0.241,-0.241,-0.245,-0.251,-0.267,-0.273,-0.272,-0.273,-0.274,-0.274,-0.271,-0.274,-0.275,-0.271,-0.27,-0.27,-0.269,-0.269,-0.267,-0.268,-0.264,-0.257,-0.241,-0.236,-0.232,-0.23,-0.231,-0.237,-0.279,-0.347,-0.405,-0.394,-0.362,-0.337,-0.336,-0.33,-0.355,-0.365,-0.192,-0.143,-0.223,-0.346,-0.433,-0.463,-0.494,-0.509,-0.519,-0.528,-0.52,-0.516,-0.516,-0.513,-0.515,-0.516,-0.527,-0.522,-0.527,-0.534,-0.545,-0.527,-0.476,-0.418,-0.311,-0.144,0.162,0.466,0.837,1.596,1.997,2.321,2.56,2.858,3.135,3.267,3.516,3.682,3.825,3.942,3.944,4.03,4.115,4.065,3.927,3.892,3.901,3.895,3.838,3.787,3.715,3.644,3.425,3.258,3.002,2.788,2.632,2.614,2.46,2.385,2.202,2.116,2.05,2.055,2.084,2.102,2.107,2.131,2.139,2.137,2.143,2.322,2.454,2.536,2.595,2.647,2.713,2.922],"m12":[3.062,3.03,3.046,2.756,2.683,2.836,3.03,3.237,3.301,3.684,3.689,3.826,3.949,4.111,4.267,4.364,4.848,4.965,5.105,5.248,5.219,5.218,5.193,4.881,4.574,4.591,4.471,4.481,4.52,4.312,4.311,4.108,3.77,3.369,3.198,3.298,3.483,3.594,3.816,3.86,3.963,3.869,3.645,3.44,3.236,3.126,3.017,2.872,2.705,2.504,2.411,2.447,2.252,2.014,2.076,2.279,2.258,2.303,2.41,2.381,2.216,2.163,2.055,2.163,2.297,2.404,2.361,2.302,2.377,2.316,2.328,2.301,2.312,2.31,2.335,2.265,2.193,2.103,2.168,2.223,2.22,2.414,2.684,2.783,2.833,2.914,3.105,3.221,3.308,3.401,3.539,3.615,3.715,3.799,3.864,3.921,4.064,4.094,4.106,4.253,4.373,4.505,4.564,4.666,4.724,4.647,4.607,4.793,4.498,4.349,4.59,4.82,4.994,5.361,5.393,5.323,5.384,5.248,4.35,3.452,2.622,2.135,1.909,1.771,1.644,1.61,1.412,1.334,1.261,1.243,1.231,1.242,1.232,1.225,1.215,1.225,1.249,1.281,1.373,1.421,1.42,1.495,1.54,1.526,1.55,1.714,1.924,2.086,2.147,2.144,2.183,2.097,2.067,2.11,2.044,2.004,1.837,1.678,1.498,1.368,1.266,1.219,1.061,0.877,0.74,0.65,0.588,0.549,0.575,0.594,0.545,0.528,0.484,0.507,0.525,0.542,0.543,0.541,0.506,0.542,0.562,0.549,0.577,0.604,0.592,0.513,0.488,0.469,0.362,0.338,0.335,0.329,0.298,0.255,0.212,0.18,0.165,0.163,0.167,0.161,0.154,0.128,0.079,0.059,0.042,-0.008,-0.012,-0.01,-0.013,-0.028,-0.056,-0.048,-0.057,-0.069,-0.074,-0.08,-0.095,-0.106,-0.11,-0.119,-0.127,-0.149,-0.154,-0.156,-0.168,-0.18,-0.189,-0.19,-0.189,-0.191,-0.191,-0.19,-0.188,-0.181,-0.18,-0.169,-0.166,-0.154,-0.147,-0.129,-0.116,-0.108,-0.109,-0.112,-0.134,-0.19,-0.283,-0.356,-0.339,-0.304,-0.272,-0.261,-0.253,-0.288,-0.266,-0.108,-0.081,-0.147,-0.279,-0.359,-0.415,-0.466,-0.481,-0.497,-0.505,-0.501,-0.487,-0.483,-0.481,-0.484,-0.491,-0.498,-0.492,-0.477,-0.487,-0.502,-0.477,-0.335,-0.237,0.013,0.287,0.852,0.992,1.249,2.233,2.629,2.828,3.018,3.337,3.534,3.647,3.757,3.862,4.007,4.149,4.073,4.149,4.16,4.022,3.679,3.609,3.671,3.718,3.703,3.68,3.65,3.526,3.166,2.936,2.691,2.506,2.436,2.525,2.407,2.398,2.143,2.081,2.081,2.079,2.114,2.171,2.187,2.217,2.267,2.245,2.221,2.565,2.747,2.804,2.798,2.855,2.954,3.247]},"dfr":[["1999-01-01",2.0],["1999-01-04",2.75],["1999-01-22",2.0],["1999-04-09",1.5],["1999-11-05",2.0],["2000-02-04",2.25],["2000-03-17",2.5],["2000-04-28",2.75],["2000-06-09",3.25],["2000-06-28",3.25],["2000-09-01",3.5],["2000-10-06",3.75],["2001-05-11",3.5],["2001-08-31",3.25],["2001-09-18",2.75],["2001-11-09",2.25],["2002-12-06",1.75],["2003-03-07",1.5],["2003-06-06",1.0],["2005-12-06",1.25],["2006-03-08",1.5],["2006-06-15",1.75],["2006-08-09",2.0],["2006-10-11",2.25],["2006-12-13",2.5],["2007-03-14",2.75],["2007-06-13",3.0],["2008-07-09",3.25],["2008-10-08",2.75],["2008-10-09",3.25],["2008-10-15",3.25],["2008-11-12",2.75],["2008-12-10",2.0],["2009-01-21",1.0],["2009-03-11",0.5],["2009-04-08",0.25],["2009-05-13",0.25],["2011-04-13",0.5],["2011-07-13",0.75],["2011-11-09",0.5],["2011-12-14",0.25],["2012-07-11",0.0],["2013-05-08",0.0],["2013-11-13",0.0],["2014-06-11",-0.1],["2014-09-10",-0.2],["2015-12-09",-0.3],["2016-03-16",-0.4],["2019-09-18",-0.5],["2022-07-27",0.0],["2022-09-14",0.75],["2022-11-02",1.5],["2022-12-21",2.0],["2023-02-08",2.5],["2023-03-22",3.0],["2023-05-10",3.25],["2023-06-21",3.5],["2023-08-02",3.75],["2023-09-20",4.0],["2024-06-12",3.75],["2024-09-18",3.5],["2024-10-23",3.25],["2024-12-18",3.0],["2025-02-05",2.75],["2025-03-12",2.5],["2025-04-23",2.25],["2025-06-11",2.0],["2026-06-17",2.25],["2026-09-16",2.5]],"sv":{"b0":1.7260452378,"b1":0.6113705184,"b2":2.1586467409,"b3":6.5982539642,"t1":1.0089432372,"t2":13.8642870417},"curveDate":"2026-10-12","spread":{"m1":0.0612,"m3":0.1279,"m6":0.2348,"m12":0.3314},"est":{"m1":2.478,"m3":2.681,"m6":2.946,"m12":3.241}};
+const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const TEN = {
+  m1:{label:'1 month',fi:'1 kk',m:1}, m3:{label:'3 months',fi:'3 kk',m:3},
+  m6:{label:'6 months',fi:'6 kk',m:6}, m12:{label:'12 months',fi:'12 kk',m:12}
+};
+const COUNTRY = {
+  fi:{tenor:'m12',note:'Most Finnish home loans follow the 12-month Euribor (12 kk Euribor). The rate is re-fixed once a year on your review date, using the fixing of that day; 3- and 6-month loans re-fix more often.'},
+  es:{tenor:'m12',note:'Spanish variable mortgages usually follow the monthly average of the 12-month Euribor published by Banco de España, reviewed every 6 or 12 months. The monthly averages on this page are the relevant figures.'},
+  pt:{tenor:'m6',note:'Portuguese mortgages are typically tied to the 3-, 6- or 12-month Euribor, using the average of the month before each review.'},
+  it:{tenor:'m3',note:'Italian variable-rate mortgages are commonly tied to the 1- or 3-month Euribor, so payments follow rate changes quickly.'},
+  at:{tenor:'m3',note:'Austrian variable-rate loans are commonly tied to the 3-month Euribor with quarterly adjustments.'},
+  xx:{tenor:'m12',note:'Conventions differ by country and by bank. Check your loan agreement for the reference rate, the reset frequency and whether a daily fixing or a monthly average is used.'}
+};
+const N = D.series.m12.length;                       // months of history; index 0 = Jan 1999
+const dd = D.curveDate.split('-').map(Number);
+const NOW_I = (dd[0]-1999)*12 + dd[1]-1;             // month index of today's yield curve
+const NOW_T = NOW_I + (dd[2]-1)/31;
+const state = {tenor:'m12', range:60, mode:'existing', country:'fi'};
+const $ = id => document.getElementById(id);
+const lab = i => MON[((i%12)+12)%12] + ' ' + (1999+Math.floor(i/12));
+const pct = (v,d=2) => v.toFixed(d) + ' %';
+const eur = v => new Intl.NumberFormat('en-IE',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(v);
+const signed = (v,f) => (v>=0?'+':'−') + f(Math.abs(v));
+
+/* ---------- market-implied path ---------- */
+function spot(t){
+  t = Math.max(t,1e-6); const s = D.sv, x = t/s.t1, y = t/s.t2;
+  const a = (1-Math.exp(-x))/x, c = (1-Math.exp(-y))/y;
+  return s.b0 + s.b1*a + s.b2*(a-Math.exp(-x)) + s.b3*(c-Math.exp(-y));
+}
+const fwd = (t,m) => t<=0 ? spot(m) : (spot(t+m)*(t+m) - spot(t)*t)/m;
+function implied(k,h){ const m = TEN[k].m/12; return fwd(h/12,m) + D.spread[k]; }
+const bandCache = {};
+function rawBand(k,h){
+  const key = k+h; if(bandCache[key]) return bandCache[key];
+  const x = D.series[k], ch = [];
+  for(let i=0;i+h<N;i++) ch.push(x[i+h]-x[i]);
+  ch.sort((a,b)=>a-b);
+  const q = p => ch[Math.min(ch.length-1,Math.floor(p*ch.length))], med = q(.5);
+  return bandCache[key] = [q(.25)-med, q(.75)-med];
+}
+function band(k,h){                                  // averaged over neighbouring horizons to smooth sampling noise
+  if(h<=0) return [0,0];
+  const w = Math.min(4,h-1); let lo = 0, hi = 0;
+  for(let j=h-w;j<=h+w;j++){ const b = rawBand(k,j); lo += b[0]; hi += b[1]; }
+  return [lo/(2*w+1), hi/(2*w+1)];
+}
+function outlook(k,h){ const v = implied(k,h), b = band(k,h); return {v, lo:v+b[0], hi:v+b[1]}; }
+
+/* ---------- chart ---------- */
+let chartId = 0;
+function drawChart(host,cfg){
+  const W = Math.max(280,host.clientWidth), H = W<520?240:340, M = {l:34,r:14,t:18,b:26};
+  const iw = W-M.l-M.r, ih = H-M.t-M.b, x0 = cfg.x0, x1 = cfg.x1, id = 'cp'+(++chartId);
+  let lo = Infinity, hi = -Infinity;
+  const see = (t,v) => { if(t>=x0 && t<=x1){ lo = Math.min(lo,v); hi = Math.max(hi,v); } };
+  cfg.series.forEach(s => s.pts.forEach(p => see(p[0],p[1])));
+  (cfg.band||[]).forEach(p => { see(p[0],p[1]); see(p[0],p[2]); });
+  const step = [0.25,0.5,1,2].find(s => (hi-lo)/s <= 6) || 2;
+  lo = Math.floor((lo-0.02)/step)*step; hi = Math.ceil((hi+0.02)/step)*step;
+  const X = t => M.l + (t-x0)/(x1-x0)*iw, Y = v => M.t + (hi-v)/(hi-lo)*ih;
+  let g = '';
+  for(let v=lo; v<=hi+1e-9; v+=step){
+    const zero = Math.abs(v)<1e-9;
+    g += `<line x1="${M.l}" x2="${W-M.r}" y1="${Y(v)}" y2="${Y(v)}" style="stroke:var(--${zero?'axis':'line'})"/>`
+       + `<text x="${M.l-6}" y="${Y(v)+4}" text-anchor="end">${+v.toFixed(2)}</text>`;
+  }
+  g += `<text x="${M.l-6}" y="9" text-anchor="end">%</text>`;
+  const span = x1-x0;
+  const every = span<=40 ? (W<520&&span>24?12:6) : span<=150 ? (W<520&&span>84?24:12) : 60;
+  for(let i=Math.ceil(x0); i<=x1; i++){
+    if(i%every) continue;
+    const t = every<12 ? MON[i%12]+' '+String(1999+Math.floor(i/12)).slice(2) : String(1999+Math.floor(i/12));
+    g += `<line x1="${X(i)}" x2="${X(i)}" y1="${M.t+ih}" y2="${M.t+ih+4}" style="stroke:var(--axis)"/>`
+       + `<text x="${X(i)}" y="${H-6}" text-anchor="middle">${t}</text>`;
+  }
+  let marks = '';
+  if(cfg.band && cfg.band.length){
+    const up = cfg.band.map(p => X(p[0])+','+Y(p[2])).join(' L');
+    const dn = cfg.band.slice().reverse().map(p => X(p[0])+','+Y(p[1])).join(' L');
+    marks += `<path d="M${up} L${dn} Z" style="fill:var(--band);stroke:none"/>`;
+  }
+  cfg.series.forEach(s => {
+    let d = '';
+    s.pts.forEach((p,i) => {
+      if(i && s.step) d += ' L'+X(p[0])+','+Y(s.pts[i-1][1]);
+      d += (i?' L':'M')+X(p[0])+','+Y(p[1]);
+    });
+    marks += `<path d="${d}" style="fill:none;stroke:var(--${s.color});stroke-width:2.25;stroke-linejoin:round;stroke-linecap:round${s.dash?';stroke-dasharray:5 4':''}"/>`;
+  });
+  cfg.series.forEach(s => { if(s.end){ const p = s.pts[s.pts.length-1]; marks += `<circle cx="${X(p[0])}" cy="${Y(p[1])}" r="4.5" style="fill:var(--${s.color});stroke:var(--surface);stroke-width:2"/>`; } });
+  if(cfg.now!=null){
+    marks += `<line x1="${X(cfg.now)}" x2="${X(cfg.now)}" y1="${M.t}" y2="${M.t+ih}" style="stroke:var(--axis);stroke-dasharray:2 3"/>`;
+    g += `<text x="${X(cfg.now)}" y="9" text-anchor="middle">today</text>`;
+  }
+  host.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.label}">
+    <defs><clipPath id="${id}"><rect x="${M.l}" y="${M.t-2}" width="${iw}" height="${ih+4}"/></clipPath></defs>
+    ${g}<g clip-path="url(#${id})">${marks}</g>
+    <line class="cx" y1="${M.t}" y2="${M.t+ih}" style="stroke:var(--ink2);stroke-width:1" visibility="hidden"/>
+    <g class="dots"></g></svg><div class="tip" hidden></div>`;
+  const svg = host.querySelector('svg'), cx = host.querySelector('.cx'), dots = host.querySelector('.dots'), tip = host.querySelector('.tip');
+  const move = e => {
+    const r = svg.getBoundingClientRect(), k = W/r.width;
+    const t = x0 + ((e.clientX-r.left)*k - M.l)/iw*(x1-x0);
+    const h = cfg.hover(Math.max(x0,Math.min(x1,t)));
+    if(!h) return;
+    const px = X(h.t);
+    cx.setAttribute('x1',px); cx.setAttribute('x2',px); cx.setAttribute('visibility','visible');
+    dots.innerHTML = h.rows.filter(r => r.v!=null).map(r => `<circle cx="${px}" cy="${Y(r.v)}" r="4.5" style="fill:var(--${r.color});stroke:var(--surface);stroke-width:2"/>`).join('');
+    tip.innerHTML = `<b>${h.title}</b>` + h.rows.map(r => `<div><i style="background:var(--${r.color})"></i>${r.name}: ${r.text}</div>`).join('');
+    tip.hidden = false;
+    const left = px/k;
+    tip.style.left = (left > r.width/2 ? left - tip.offsetWidth - 12 : left + 12) + 'px';
+  };
+  const out = () => { cx.setAttribute('visibility','hidden'); dots.innerHTML = ''; tip.hidden = true; };
+  svg.addEventListener('pointermove',move); svg.addEventListener('pointerdown',move); svg.addEventListener('pointerleave',out);
+}
+
+/* ---------- deposit rate as a step series on the month axis ---------- */
+const DFR = D.dfr.map(([d,v]) => { const p = d.split('-').map(Number); return [(p[0]-1999)*12 + p[1]-1 + (p[2]-1)/31, v]; });
+const dfrAt = t => { let v = DFR[0][1]; for(const p of DFR){ if(p[0]<=t) v = p[1]; else break; } return v; };
+
+/* ---------- sections ---------- */
+function renderTiles(){
+  $('tiles').innerHTML = Object.keys(TEN).map(k => {
+    const now = D.series[k][N-1], ago = D.series[k][N-13], d = now-ago;
+    return `<button class="tile" data-k="${k}" aria-pressed="${k===state.tenor}">
+      <span class="t">${TEN[k].label} · ${TEN[k].fi}</span>
+      <span class="v num">${now.toFixed(3)}<small> %</small></span>
+      <span class="d num">${d>=0?'▲':'▼'} ${Math.abs(d).toFixed(2)} pts vs ${lab(N-13)}</span></button>`;
+  }).join('');
+  $('heroRate').innerHTML = `${D.series[state.tenor][N-1].toFixed(2)}<small>%</small>`;
+  $('heroCap').textContent = `${TEN[state.tenor].label} Euribor, ${lab(N-1)} average`;
+  $('tilesSub').innerHTML = `Average for ${lab(N-1)}, the latest full month published by the ECB. For the official rate of a single day, see <a href="https://www.emmi-benchmarks.eu/benchmarks/euribor/rate/" target="_blank" rel="noopener">EMMI</a>. ECB deposit rate: ${pct(DFR[DFR.length-1][1])}.`;
+}
+function renderHistory(){
+  const k = state.tenor, x0 = state.range ? N-state.range : 0, x1 = N;
+  const e = D.series[k].map((v,i) => [i+.5,v]).filter(p => p[0]>=x0-1);
+  const d = [[x0,dfrAt(x0)], ...DFR.filter(p => p[0]>x0), [x1,dfrAt(x1)]];
+  $('histLegend').innerHTML = `<span><i style="border-color:var(--s1)"></i>${TEN[k].label} Euribor, monthly average (${pct(D.series[k][N-1])} in ${lab(N-1)})</span>
+    <span><i style="border-color:var(--s2)"></i>ECB deposit rate (${pct(dfrAt(x1))})</span>`;
+  drawChart($('histChart'),{x0,x1,label:`${TEN[k].label} Euribor and ECB deposit rate`,
+    series:[{color:'s2',pts:d,step:true},{color:'s1',pts:e,end:true}],
+    hover:t => { const i = Math.max(0,Math.min(N-1,Math.floor(t)));
+      return {t:i+.5,title:lab(i),rows:[
+        {name:TEN[k].label+' Euribor',color:'s1',v:D.series[k][i],text:pct(D.series[k][i],3)},
+        {name:'Deposit rate',color:'s2',v:dfrAt(i+.97),text:pct(dfrAt(i+.97))}]}; }});
+  document.querySelectorAll('#ranges button').forEach(b => b.setAttribute('aria-pressed', +b.dataset.r===state.range));
+}
+function renderYearTable(){
+  let h = '<tr><th>Year</th>' + Object.keys(TEN).map(k => `<th>${TEN[k].label}</th>`).join('') + '</tr>';
+  for(let y=Math.floor((N-1)/12); y>=0; y--){
+    const a = y*12, b = Math.min(N,a+12), part = b-a<12;
+    h += `<tr><td>${1999+y}${part?` (Jan–${MON[b-a-1]})`:''}</td>` + Object.keys(TEN).map(k => {
+      const s = D.series[k].slice(a,b); return `<td>${(s.reduce((p,c)=>p+c,0)/s.length).toFixed(2)}</td>`; }).join('') + '</tr>';
+  }
+  $('yearTable').innerHTML = h;
+}
+function renderOutlook(){
+  const k = state.tenor, x0 = NOW_T-24, x1 = NOW_T+60;
+  const hist = D.series[k].map((v,i) => [i+.5,v]).filter(p => p[0]>=x0-1 && p[0]<NOW_T);
+  hist.push([NOW_T,D.est[k]]);
+  const path = [], bd = [];
+  for(let h=0;h<=60;h++){ const o = outlook(k,h); path.push([NOW_T+h,o.v]); bd.push([NOW_T+h,o.lo,o.hi]); }
+  $('outLegend').innerHTML = `<span><i style="border-color:var(--s1)"></i>${TEN[k].label} Euribor so far</span>
+    <span><i class="dash" style="border-color:var(--s1)"></i>Market-implied path</span><span><i class="box"></i>Typical historical range</span>`;
+  drawChart($('outChart'),{x0,x1,now:NOW_T,band:bd,label:`Market-implied path of the ${TEN[k].label} Euribor`,
+    series:[{color:'s1',pts:hist,end:true},{color:'s1',pts:path,dash:true}],
+    hover:t => {
+      if(t<NOW_T-.5){ const i = Math.max(0,Math.min(N-1,Math.floor(t)));
+        return {t:i+.5,title:lab(i),rows:[{name:'Monthly average',color:'s1',v:D.series[k][i],text:pct(D.series[k][i],3)}]}; }
+      const h = Math.max(0,Math.min(60,Math.round(t-NOW_T))), o = outlook(k,h);
+      return {t:NOW_T+h,title:h?lab(NOW_I+h)+' (in '+h+' mo)':'Today (estimate)',rows:[
+        {name:h?'Markets imply':'Estimate',color:'s1',v:o.v,text:pct(o.v)},
+        ...(h?[{name:'Typical range',color:'s1',v:null,text:pct(o.lo)+' to '+pct(o.hi)}]:[])]}; }});
+  $('steps').innerHTML = `<div><span>Today<small>estimate from the yield curve</small></span><b class="num">${pct(D.est[k])}</b></div>` +
+    [6,12,24,36,60].map(h => { const o = outlook(k,h);
+      return `<div><span>${h<12?'In 6 months':'In '+h/12+(h===12?' year':' years')}<small class="num">${pct(o.lo,1)} to ${pct(o.hi,1)}</small></span><b class="num">${pct(o.v)}</b></div>`; }).join('');
+}
+
+/* ---------- loan calculator ---------- */
+const pay = (P,r,n) => { const m = r/1200; return n<=0 ? 0 : Math.abs(m)<1e-9 ? P/n : P*m/(1-Math.pow(1+m,-n)); };
+function balAfter(P,r,n,k){ const m = r/1200; if(Math.abs(m)<1e-9) return P*(1-k/n); const g = Math.pow(1+m,k); return P*g - pay(P,r,n)*(g-1)/m; }
+let loan = null;
+function fillReset(){
+  const tm = TEN[state.tenor].m, sel = $('reset'), keep = Math.min(+sel.value||Math.ceil(tm/2), tm);
+  sel.innerHTML = Array.from({length:tm},(_,i) => `<option value="${i+1}">${lab(NOW_I+i+1)}</option>`).join('');
+  sel.value = keep;
+  prefillRef();
+}
+function prefillRef(){
+  const tm = TEN[state.tenor].m, i = NOW_I + (+$('reset').value) - tm;      // month of the last reset
+  const v = i>=N ? D.est[state.tenor] : D.series[state.tenor][i];
+  $('ref').value = v.toFixed(3);
+  $('refHint').textContent = `Pre-filled with ${i>=N?"today's estimate":'the '+lab(i)+' average'}. Use the figure from your bank if you have it.`;
+}
+function renderCalc(){
+  const k = state.tenor, tm = TEN[k].m, isNew = state.mode==='new', fi = state.country==='fi';
+  document.querySelectorAll('#mode button').forEach(b => b.setAttribute('aria-pressed', b.dataset.m===state.mode));
+  $('amountLbl').textContent = isNew ? 'Loan amount (€)' : 'Remaining balance (€)';
+  $('yearsLbl').textContent = isNew ? 'Loan term, years' : 'Years left';
+  $('resetWrap').hidden = $('refWrap').hidden = isNew;
+  $('tenorSel').value = k;
+  const P = +$('amount').value, yrs = +$('years').value, mg = +$('margin').value, n = Math.round(yrs*12);
+  if(!(P>0) || !(n>=12) || !(mg>=0) || isNaN(+$('ref').value)){
+    $('headline').textContent = 'Enter a loan amount, a term of at least one year and a margin to see your payments.';
+    $('payTable').innerHTML = ''; $('calcNote').textContent = ''; loan = null; return;
+  }
+  const ref0 = isNew ? D.est[k] : +$('ref').value, k1 = isNew ? tm : +$('reset').value;
+  const r0 = ref0+mg, A0 = pay(P,r0,n);
+  const rows = [{when:isNew?'Today (estimated rate)':'Now', ref:ref0, A:A0}];
+  const at = (h,name) => {
+    if(n-h < 12) return;
+    const B = balAfter(P,r0,n,h), o = outlook(k,h), f = r => pay(B,r+mg,n-h);
+    rows.push({when:name, ref:o.v, A:f(o.v), lo:f(o.lo), hi:f(o.hi)});
+  };
+  at(k1, (isNew?'First reset, ':'Next reset, ') + lab(NOW_I+k1));
+  if(k1<30) at(36,'In 3 years, '+lab(NOW_I+36));
+  const sn = fi ? Math.min(n,300) : n, AS = pay(P,6,sn);
+  const tr = r => `<tr><td>${r.when}${r.lo!=null?`<small>Typical range ${eur(Math.min(r.lo,r.hi))} to ${eur(Math.max(r.lo,r.hi))}</small>`:''}</td>
+    <td>${pct(r.ref)} + ${pct(mg)} = ${pct(r.ref+mg)}</td><td><b>${eur(r.A)}</b></td><td>${r===rows[0]?'':signed(r.A-A0,eur)}</td></tr>`;
+  $('payTable').innerHTML = '<tr><th>When</th><th>Euribor + margin</th><th>Per month</th><th>Change</th></tr>' + rows.map(tr).join('') +
+    `<tr><td>${fi?'Stress test at 6 %':'If your total rate were 6 %'}${fi&&n>300?'<small>over 25 years</small>':''}</td><td>6.00 %</td><td><b>${eur(AS)}</b></td><td>${signed(AS-A0,eur)}</td></tr>`;
+  const nx = rows[1];
+  $('headline').innerHTML = !nx ? `Your payment is about <b>${eur(A0)}</b> a month.` : isNew
+    ? `About <b>${eur(A0)}</b> a month at today's estimated ${TEN[k].label} Euribor. Markets imply about <b>${eur(nx.A)}</b> after the first reset in ${lab(NOW_I+k1)}.`
+    : `About <b>${eur(A0)}</b> a month now. At your reset in ${lab(NOW_I+k1)}, markets imply about <b>${eur(nx.A)}</b> (${signed(nx.A-A0,eur)}).`;
+  let note = fi ? 'The 6 % stress test follows the FIN-FSA recommendation that Finnish lenders check affordability at 6 % interest over at most 25 years. ' : '';
+  if(isNew) note += 'Same loan today on other reference rates: ' + Object.keys(TEN).filter(t => t!=='m1').map(t => `${TEN[t].label} ${eur(pay(P,D.est[t]+mg,n))}`).join(', ') + '. A shorter reference rate is usually cheaper today but re-fixes more often.';
+  $('calcNote').textContent = note;
+  loan = {mode:state.mode, amount:P, years:yrs, margin:mg, tenor:TEN[k].label, rows:rows.map(r => ({when:r.when, euribor:+r.ref.toFixed(3), monthly:Math.round(r.A), range:r.lo!=null?[Math.round(Math.min(r.lo,r.hi)),Math.round(Math.max(r.lo,r.hi))]:undefined})), stress6pct:Math.round(AS)};
+}
+
+function setTenor(k){ state.tenor = k; renderTiles(); renderHistory(); renderOutlook(); fillReset(); renderCalc(); }
+function renderCountry(){ $('countryNote').textContent = COUNTRY[state.country].note; }
+
+/* ---------- ask Claude ---------- */
+function contextText(){
+  const L = [];
+  L.push(`Latest official monthly averages (${lab(N-1)}): ` + Object.keys(TEN).map(k => `${TEN[k].label} ${D.series[k][N-1]}%`).join(', '));
+  L.push(`Estimated level today (${D.curveDate}, derived from the ECB yield curve, not an official fixing; this page does not carry daily fixings): ` + Object.keys(TEN).map(k => `${TEN[k].label} ${D.est[k]}%`).join(', '));
+  L.push(`ECB deposit rate changes since 2022: ` + D.dfr.filter(p => p[0]>='2022').map(p => `${p[0]} ${p[1]}%`).join('; '));
+  [state.tenor].forEach(k => L.push(`${TEN[k].label} Euribor monthly averages, last 24 months (${lab(N-24)} to ${lab(N-1)}): ` + D.series[k].slice(-24).join(', ')));
+  const yr = k => { const o = []; for(let y=0;y*12<N;y++){ const s = D.series[k].slice(y*12,y*12+12); o.push((1999+y)+': '+(s.reduce((a,b)=>a+b,0)/s.length).toFixed(2)); } return o.join(', '); };
+  L.push(TEN[state.tenor].label + ' Euribor yearly averages (latest year partial): ' + yr(state.tenor));
+  [state.tenor].forEach(k => L.push(`Market-implied ${TEN[k].label} Euribor (derived from the ECB yield curve of ${D.curveDate}; typical historical range in brackets): ` +
+    [6,12,24,36,60].map(h => { const o = outlook(k,h); return `in ${h} months ${o.v.toFixed(2)}% [${o.lo.toFixed(2)} to ${o.hi.toFixed(2)}]`; }).join('; ')));
+  L.push('Country selected: ' + $('country').selectedOptions[0].textContent + '. Local convention: ' + COUNTRY[state.country].note);
+  L.push('Maturity selected on the page: ' + TEN[state.tenor].label);
+  L.push('Loan entered in the calculator (may be the example figures): ' + (loan ? JSON.stringify(loan) : 'none'));
+  return L.join('\n');
+}
+const RULES = `You are the assistant on "Korkovahti", a page that helps home-loan borrowers (mainly in Finland, also other euro-area countries) understand Euribor.
+Answer from the page data below plus general knowledge of how Euribor, the ECB and mortgages work. Rules:
+- Be brief: under 140 words unless asked for more. Plain text only, no Markdown, no headings.
+- The outlook is what markets price in, not a forecast. Say so and mention the uncertainty whenever you use it.
+- Do not tell the person what to do with their money. Lay out the trade-offs and what to check with their bank.
+- If the data does not cover something (for example news events), say you cannot see it here.
+- Reply in the language the person writes in.`;
+let sample = null, backend = null, ctl = null; const turns = [];
+function addMsg(cls,text){ const d = document.createElement('div'); d.className = 'msg '+cls; d.textContent = text; $('msgs').append(d); return d; }
+const ERR = {
+  not_granted:'Claude is not allowed for this page, so questions are switched off.',
+  sampling_disabled:'Claude is not available for this account.',
+  rate_limited:'Too many questions for now. Try again in a little while.',
+  session_expired:'Your Claude session has expired. Sign in again and reload the page.',
+  refused:'The assistant could not answer that. Try asking it differently.',
+  busy:'The free daily allowance of questions is used up. It resets at midnight UTC.',
+  prompt_too_large:'That conversation got too long. Reload the page to start again.'
+};
+async function ask(text){
+  text = text.trim(); if(!text || !backend || ctl) return;
+  addMsg('u',text); turns.push({role:'user',content:text});
+  const bubble = addMsg('a','Thinking…');
+  $('q').value = ''; $('send').disabled = true; $('stop').hidden = false; $('askStatus').textContent = '';
+  ctl = new AbortController();
+  try{
+    const res = backend==='api' ? await askApi(ctl.signal)
+      : await sample([{role:'user',content:RULES + '\n\nPAGE DATA\n' + contextText()}, ...turns.slice(-12)], {cache:false, signal:ctl.signal, onText:({text}) => { bubble.textContent = text; }});
+    bubble.textContent = res.text; turns.push({role:'assistant',content:res.text});
+    if(res.truncated) $('askStatus').textContent = 'The answer was cut short. Ask for less at a time.';
+  }catch(e){
+    turns.pop();
+    if(e && e.text) bubble.textContent = e.text; else bubble.remove();
+    const code = e && (e.code || (e.name==='AbortError' ? 'cancelled' : null));
+    if(code !== 'cancelled') $('askStatus').textContent = ERR[code] || 'Something went wrong while answering. Try again.';
+    if(['not_granted','sampling_disabled','not_declared','capability_disabled','capability_removed'].includes(code)){ backend = null; $('q').disabled = true; }
+  }finally{
+    ctl = null; $('stop').hidden = true; $('send').disabled = !backend;
+  }
+}
+async function initAsk(){
+  const qs = ['What does the outlook mean for my loan?','12-month or 3-month Euribor for a new loan: what are the trade-offs?','How has Euribor moved over the last two years?','How does an interest-rate cap (korkokatto) work?'];
+  $('chips').innerHTML = qs.map(q => `<button type="button">${q}</button>`).join('');
+  if(window.claude && window.claude.use){                       // opened inside Claude: use the viewer's Claude
+    try{ sample = await window.claude.use('sample'); }catch(e){ sample = null; }
+    if(sample) backend = 'claude';
+  }else if(location.protocol.indexOf('http')===0) backend = 'api'; // public site: the site's own /api/ask
+  if(backend){
+    $('q').disabled = false; $('send').disabled = false;
+    $('askStatus').textContent = backend==='api' ? 'Runs on a free AI model with a daily limit on questions. Check important figures against the numbers above.'
+      : 'Uses your own Claude account; the first question asks for your permission.';
+  }else{ $('askForm').hidden = true; $('chips').hidden = true; $('askStatus').textContent = 'Questions are not available in this view.'; }
+}
+async function askApi(signal){
+  const r = await fetch('/api/ask',{method:'POST',headers:{'content-type':'application/json'},signal,
+    body:JSON.stringify({context:contextText(),turns:turns.slice(-8)})});
+  let j = {}; try{ j = await r.json(); }catch(e){}
+  if(!r.ok || !j.answer) throw {code:j.error || 'upstream_error'};
+  return {text:j.answer};
+}
+
+/* ---------- wiring ---------- */
+$('stamp').textContent = `Data: monthly averages to ${lab(N-1)}, yield curve of ${dd[2]} ${MON[dd[1]-1]} ${dd[0]}.`;
+$('yr').textContent = new Date().getFullYear();
+$('tenorSel').innerHTML =Object.keys(TEN).map(k => `<option value="${k}">${TEN[k].label} Euribor</option>`).join('');
+$('tiles').addEventListener('click',e => { const b = e.target.closest('.tile'); if(b) setTenor(b.dataset.k); });
+$('ranges').addEventListener('click',e => { const b = e.target.closest('button'); if(b){ state.range = +b.dataset.r; renderHistory(); } });
+$('mode').addEventListener('click',e => { const b = e.target.closest('button'); if(b){ state.mode = b.dataset.m; renderCalc(); } });
+$('country').addEventListener('change',e => { state.country = e.target.value; renderCountry(); setTenor(COUNTRY[state.country].tenor); });
+$('tenorSel').addEventListener('change',e => setTenor(e.target.value));
+$('reset').addEventListener('change',() => { prefillRef(); renderCalc(); });
+['amount','years','margin','ref'].forEach(id => $(id).addEventListener('input',renderCalc));
+$('chips').addEventListener('click',e => { const b = e.target.closest('button'); if(b) ask(b.textContent); });
+$('askForm').addEventListener('submit',e => { e.preventDefault(); ask($('q').value); });
+$('q').addEventListener('keydown',e => { if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); ask($('q').value); } });
+$('stop').addEventListener('click',() => ctl && ctl.abort());
+renderCountry(); renderYearTable(); setTenor('m12'); initAsk();
+if('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.band > .inner').forEach(el => { if(el.getBoundingClientRect().top > innerHeight){ el.classList.add('reveal'); io.observe(el); } });
+}
+let rz; new ResizeObserver(() => { clearTimeout(rz); rz = setTimeout(() => { renderHistory(); renderOutlook(); }, 120); }).observe($('histChart'));
+</script>
+</body></html>

@@ -1,0 +1,5 @@
+# Fragment built for the Claude artifact preview; the site is public/index.html
+korkovahti.html
+__pycache__/
+.wrangler/
+node_modules/
