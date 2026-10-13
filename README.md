@@ -8,10 +8,6 @@ expect next, and what that means for the monthly payment.
 Finnish borrowers, most of whose loans follow the 12-month Euribor. Spain,
 Portugal, Italy and Austria are supported with their own conventions.
 
-> **Status:** site, data pipeline and chat backend are built. Public
-> deployment on Cloudflare is the next step; the chat backend and the scheduled
-> refresh have not yet run in production.
-
 ## Why I built it
 
 Sites that publish Euribor show the number. They don't answer the questions a
