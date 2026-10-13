@@ -10,6 +10,54 @@ expect next, and what that means for the monthly payment.
 Finnish borrowers, most of whose loans follow the 12-month Euribor. Spain,
 Portugal, Italy and Austria are supported with their own conventions.
 
+## Highlights
+
+### Real data, refreshed automatically by GitHub Actions
+
+[![Refresh ECB data](https://github.com/banupriyaust/korkovahti/actions/workflows/refresh.yml/badge.svg)](https://github.com/banupriyaust/korkovahti/actions/workflows/refresh.yml)
+
+Every number on the site is real. Nothing is mocked, sampled or typed in by
+hand.
+
+- **Official source.** All figures come straight from the European Central
+  Bank's public API: 333 months of Euribor for four maturities, every deposit
+  rate change since 1999, and the daily yield curve.
+- **Hands-off pipeline.** A GitHub Actions workflow runs every weekday morning.
+  It fetches the latest ECB data, validates it, rebuilds the page and commits
+  the result only if something changed.
+- **Automatic publishing.** That commit triggers Cloudflare to redeploy, so the
+  live site updates with no manual step.
+- **Auditable.** Each refresh is a commit, so the history of the data is the
+  git history of this repository.
+
+```
+ECB API  ->  GitHub Actions (build.py: fetch, validate, build)  ->  git commit  ->  Cloudflare deploy  ->  live site
+```
+
+### An AI assistant on Cloudflare Workers AI, grounded in the data
+
+The "Ask" box lets a visitor question the data in plain language, with no
+login and at no cost to them or to me.
+
+- **Grounded, not guessing.** Each question is sent together with the page's
+  current figures, the market-implied path and the visitor's own loan inputs.
+  The model is instructed to use those numbers exactly as given and never to
+  invent a rate or a payment.
+- **Guardrails in the prompt.** It must describe the outlook as market pricing
+  and not as a forecast, mention the uncertainty, stay on the topic of rates
+  and home loans, give no financial advice, and reply in the visitor's
+  language.
+- **Serverless and keyless.** A Cloudflare Worker serves the site and calls an
+  open model (Llama 3.3 70B) through the Workers AI binding. There is no API
+  key to store or leak.
+- **Protected.** The endpoint only accepts requests from the site itself, and
+  it caps the length of the question, the context and the conversation.
+- **Zero running cost with a hard ceiling.** It runs inside the free daily
+  Workers AI allowance. When that is used up the chat pauses until the next
+  day and nothing is billed.
+- **Always current.** Because the figures travel with each question, the
+  assistant's answers follow every data refresh without retraining anything.
+
 ## Why I built it
 
 Sites that publish Euribor show the number. They don't answer the questions a
