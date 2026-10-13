@@ -1,6 +1,6 @@
 # Korkovahti: Euribor, made clear
 
-**Live site: [korkovahti.banupriyaust.workers.dev](https://korkovahti.banupriyaust.workers.dev)**
+**Live site: [korkovahti.euribor.workers.dev](https://korkovahti.euribor.workers.dev)**
 
 An end-to-end data product that turns public ECB data into answers a home-loan
 borrower can act on: where Euribor has been, where it stands, what markets
