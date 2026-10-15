@@ -78,8 +78,8 @@ not analysts.
 |---|---|---|
 | **Rates** | Where does each maturity stand? | Latest ECB monthly averages for 1, 3, 6 and 12 months, with year-on-year change |
 | **History** | How did we get here? | 27 years of monthly data against the ECB deposit rate, with range filters and a yearly table |
-| **Outlook** | What are markets pricing in? | A five-year market-implied path with an empirical uncertainty band |
-| **Your loan** | What happens to my payment? | Annuity recalculation at the next reset, in three years, and under a 6 % stress test |
+| **Outlook** | What are markets pricing in? | A two-year market-implied path with an empirical uncertainty band, plus a "How accurate is this?" panel from the back-test |
+| **Your loan** | What happens to my payment? | Annuity recalculation at the next reset, in two years, and under a 6 % stress test |
 | **Ask** | What does this mean for me? | An AI assistant grounded in the page's own figures and the visitor's loan inputs |
 
 ### What the data says (build of 13 October 2026)
@@ -137,7 +137,7 @@ calibrated over the latest full month (0.33 points for the 12-month rate).
 estimate between official monthly prints. Checked against the real fixing of
 12 October 2026 it was within 0.07 points.
 
-**Uncertainty band.** For each horizon from 1 to 60 months, the band is the
+**Uncertainty band.** For each horizon from 1 to 24 months, the band is the
 interquartile range of every historical move over that horizon since 1999,
 centred on the market path and smoothed across neighbouring horizons. It is
 empirical and assumes no distribution.
@@ -311,9 +311,9 @@ stops answering after a model is retired, change `MODEL` in `wrangler.toml`.
 - The "today" figure is an estimate, not the official fixing.
 - The outlook comes from government-bond forwards, a proxy for Euribor futures.
 - The chat has no per-visitor rate limit yet.
-- The outlook is weaker than "no change" beyond two years (see the back-test).
-- Planned: show the back-test on the site, shorten or flag the long end of the
-  outlook, fixed-instalment loans, Finnish-language version.
+- The outlook is weaker than "no change" beyond two years, so the site shows
+  two years only and explains why in its accuracy panel.
+- Planned: fixed-instalment loans, Finnish-language version.
 
 ## Data sources
 

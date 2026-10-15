@@ -119,6 +119,17 @@ td small{display:block;color:var(--muted);font-size:.78rem;white-space:normal}
 .steps span{color:var(--ink2);font-size:.95rem}
 .steps small{display:block;color:var(--muted);font-size:.76rem}
 .steps b{font-size:1.25rem;font-weight:600;letter-spacing:-.02em}
+.acc{gap:20px}
+.acc h3{margin:0;font-size:1.35rem;font-weight:600;letter-spacing:-.02em}
+.acc-head{display:flex;flex-direction:column;gap:4px}
+.acc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.acc-cell{background:var(--field);border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.acc-cell .k{font-size:.8rem;font-weight:600;color:var(--muted)}
+.acc-cell .v{font-size:1.7rem;font-weight:600;letter-spacing:-.025em;line-height:1.15}
+.acc-cell .v small{font-size:.5em;font-weight:500;color:var(--muted)}
+.acc-cell .c{font-size:.8rem;color:var(--ink2)}
+.chip{align-self:flex-start;margin-top:6px;font-size:.74rem;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--wash);color:var(--ink)}
+.acc-points{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:6px;font-size:.92rem;color:var(--ink2);max-width:64em}
 
 .calc{display:grid;grid-template-columns:320px minmax(0,1fr);gap:14px;align-items:start}
 .form label{display:flex;flex-direction:column;gap:6px;font-size:.84rem;color:var(--ink2)}
@@ -157,7 +168,7 @@ footer b{color:var(--ink2);font-weight:600}
 @media (max-width:820px){
   nav.top .links{display:none}
   .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .outlook,.calc{grid-template-columns:minmax(0,1fr)}
+  .outlook,.calc,.acc-grid{grid-template-columns:minmax(0,1fr)}
 }
 </style>
 
@@ -248,7 +259,15 @@ footer b{color:var(--ink2);font-weight:600}
           <div class="steps" id="steps"></div>
         </div>
       </div>
-      <p class="sub center">The shaded range is the middle half of how far this rate actually moved over the same horizon in the past (1999 to today), centred on the market path. Half of the time the real outcome fell outside it.</p>
+      <p class="sub center">The shaded range shows how far this rate has typically moved over the same horizon since 1999: the middle half of past moves, centred on the market path. In testing since 2004 it caught the real rate about two times in three within a year, and less often further out.</p>
+      <div class="card acc" id="accuracy" hidden>
+        <div class="acc-head">
+          <h3>How accurate is this?</h3>
+          <p class="sub" id="accSub"></p>
+        </div>
+        <div class="acc-grid" id="accGrid"></div>
+        <ul class="acc-points" id="accPoints"></ul>
+      </div>
     </div>
   </section>
 
@@ -311,7 +330,7 @@ footer b{color:var(--ink2);font-weight:600}
     <div class="inner">
       <p class="num" id="stamp"></p>
       <p><b>Sources.</b> Monthly Euribor averages, the deposit facility rate and the yield curve: <a href="https://data.ecb.europa.eu" target="_blank" rel="noopener">ECB Data Portal</a>. All of it is published by the ECB for free reuse; this page does not show daily Euribor fixings. Euribor is administered by the European Money Markets Institute (EMMI).</p>
-      <p><b>How the outlook is built.</b> Forward rates are computed from the ECB's AAA government-bond yield curve (Svensson model) and shifted by the gap between that curve and Euribor, measured over the latest full month. The same method gives the "today" estimate, which can differ from the official fixing by up to about a tenth of a point. It approximates what Euribor futures price; it is not a forecast by this site. Beyond two or three years the path also carries the extra yield investors ask for holding longer bonds, so it tends to sit higher than what they truly expect.</p>
+      <p><b>How the outlook is built.</b> Forward rates are computed from the ECB's AAA government-bond yield curve (Svensson model) and shifted by the gap between that curve and Euribor, measured over the latest full month. The same method gives the "today" estimate, which can differ from the official fixing by up to about a tenth of a point. It approximates what Euribor futures price; it is not a forecast by this site. The outlook stops at two years: further out the path carries the extra yield investors ask for holding longer bonds, and in back-testing since 2004 it did worse than simply assuming no change.</p>
       <p><b>Loan maths.</b> Annuity loan <span class="fi">(annuiteettilaina)</span>: the payment is recalculated at each reset from the remaining balance and term. Your bank's rounding, fees, interest caps and repayment type can change the result.</p>
       <p>For information only. Not financial advice. Check your loan agreement and talk to your bank before deciding anything.</p>
       <p class="copy">© <span id="yr">2026</span> Banupriya Selvaraj. All rights reserved. Made with <span class="heart" aria-label="love">♥</span> in Finland. <a href="https://www.linkedin.com/in/banupriya-selvaraj" target="_blank" rel="noopener">Message me on LinkedIn</a></p>
@@ -480,11 +499,11 @@ function renderYearTable(){
   $('yearTable').innerHTML = h;
 }
 function renderOutlook(){
-  const k = state.tenor, x0 = NOW_T-24, x1 = NOW_T+60;
+  const k = state.tenor, x0 = NOW_T-24, x1 = NOW_T+24;
   const hist = D.series[k].map((v,i) => [i+.5,v]).filter(p => p[0]>=x0-1 && p[0]<NOW_T);
   hist.push([NOW_T,D.est[k]]);
   const path = [], bd = [];
-  for(let h=0;h<=60;h++){ const o = outlook(k,h); path.push([NOW_T+h,o.v]); bd.push([NOW_T+h,o.lo,o.hi]); }
+  for(let h=0;h<=24;h++){ const o = outlook(k,h); path.push([NOW_T+h,o.v]); bd.push([NOW_T+h,o.lo,o.hi]); }
   $('outLegend').innerHTML = `<span><i style="border-color:var(--s1)"></i>${TEN[k].label} Euribor so far</span>
     <span><i class="dash" style="border-color:var(--s1)"></i>Market-implied path</span><span><i class="box"></i>Typical historical range</span>`;
   drawChart($('outChart'),{x0,x1,now:NOW_T,band:bd,label:`Market-implied path of the ${TEN[k].label} Euribor`,
@@ -492,12 +511,12 @@ function renderOutlook(){
     hover:t => {
       if(t<NOW_T-.5){ const i = Math.max(0,Math.min(N-1,Math.floor(t)));
         return {t:i+.5,title:lab(i),rows:[{name:'Monthly average',color:'s1',v:D.series[k][i],text:pct(D.series[k][i],3)}]}; }
-      const h = Math.max(0,Math.min(60,Math.round(t-NOW_T))), o = outlook(k,h);
+      const h = Math.max(0,Math.min(24,Math.round(t-NOW_T))), o = outlook(k,h);
       return {t:NOW_T+h,title:h?lab(NOW_I+h)+' (in '+h+' mo)':'Today (estimate)',rows:[
         {name:h?'Markets imply':'Estimate',color:'s1',v:o.v,text:pct(o.v)},
         ...(h?[{name:'Typical range',color:'s1',v:null,text:pct(o.lo)+' to '+pct(o.hi)}]:[])]}; }});
   $('steps').innerHTML = `<div><span>Today<small>estimate from the yield curve</small></span><b class="num">${pct(D.est[k])}</b></div>` +
-    [6,12,24,36,60].map(h => { const o = outlook(k,h);
+    [6,12,18,24].map(h => { const o = outlook(k,h);
       return `<div><span>${h<12?'In 6 months':'In '+h/12+(h===12?' year':' years')}<small class="num">${pct(o.lo,1)} to ${pct(o.hi,1)}</small></span><b class="num">${pct(o.v)}</b></div>`; }).join('');
 }
 
@@ -538,7 +557,7 @@ function renderCalc(){
     rows.push({when:name, ref:o.v, A:f(o.v), lo:f(o.lo), hi:f(o.hi)});
   };
   at(k1, (isNew?'First reset, ':'Next reset, ') + lab(NOW_I+k1));
-  if(k1<30) at(36,'In 3 years, '+lab(NOW_I+36));
+  if(k1<18) at(24,'In 2 years, '+lab(NOW_I+24));
   const sn = fi ? Math.min(n,300) : n, AS = pay(P,6,sn);
   const tr = r => `<tr><td>${r.when}${r.lo!=null?`<small>Typical range ${eur(Math.min(r.lo,r.hi))} to ${eur(Math.max(r.lo,r.hi))}</small>`:''}</td>
     <td>${pct(r.ref)} + ${pct(mg)} = ${pct(r.ref+mg)}</td><td><b>${eur(r.A)}</b></td><td>${r===rows[0]?'':signed(r.A-A0,eur)}</td></tr>`;
@@ -554,7 +573,25 @@ function renderCalc(){
   loan = {mode:state.mode, amount:P, years:yrs, margin:mg, tenor:TEN[k].label, rows:rows.map(r => ({when:r.when, euribor:+r.ref.toFixed(3), monthly:Math.round(r.A), range:r.lo!=null?[Math.round(Math.min(r.lo,r.hi)),Math.round(Math.max(r.lo,r.hi))]:undefined})), stress6pct:Math.round(AS)};
 }
 
-function setTenor(k){ state.tenor = k; renderTiles(); renderHistory(); renderOutlook(); fillReset(); renderCalc(); }
+function renderAccuracy(){
+  if(!D.bt) return;
+  const k = D.bt[state.tenor] ? state.tenor : (state.tenor==='m1' ? 'm3' : 'm12'), B = D.bt[k];
+  const y = D.btFrom.split('-').map(Number);
+  $('accSub').textContent = `The same method, replayed every month since ${MON[y[1]-1]} ${y[0]} using only the data known at the time, then compared with the ${TEN[k].label} Euribor that followed.` + (k!==state.tenor ? ` Tested on the ${TEN[k].label} rate, the closest maturity to yours.` : '');
+  $('accGrid').innerHTML = Object.keys(B).map(h => { const r = B[h], d = r.market - r.nochange;
+    const verdict = d < -0.02 ? 'Better than assuming no change' : d > 0.02 ? 'Worse than assuming no change' : 'About as good as assuming no change';
+    return `<div class="acc-cell"><span class="k">${+h<12 ? h+' months' : h/12+(h==='12'?' year':' years')} ahead</span>
+      <span class="v num">±${r.market.toFixed(2)}<small> pts</small></span>
+      <span class="c">Typical miss. Assuming no change: ±${r.nochange.toFixed(2)}</span>
+      <span class="chip">${verdict}</span></div>`; }).join('');
+  const r12 = B['12'];
+  $('accPoints').innerHTML = `<li>When markets priced a clear move, the rate went that way ${Math.round(r12.hit*100)} % of the time a year later.</li>`
+    + `<li>The shaded range caught the real rate ${Math.round(r12.band*100)} % of the time a year ahead.</li>`
+    + `<li>The big misses came from shocks nobody priced: in July 2008 markets implied 5.5 % for a year later, and the rate fell to 1.4 %.</li>`
+    + `<li>Beyond two years the method did worse than assuming no change, so this page stops at two years. <a href="https://github.com/banupriyaust/korkovahti#back-test-how-good-is-the-outlook" target="_blank" rel="noopener">Full back-test</a></li>`;
+  $('accuracy').hidden = false;
+}
+function setTenor(k){ state.tenor = k; renderTiles(); renderHistory(); renderOutlook(); renderAccuracy(); fillReset(); renderCalc(); }
 function renderCountry(){ $('countryNote').textContent = COUNTRY[state.country].note; }
 
 /* ---------- ask Claude ---------- */
@@ -567,9 +604,12 @@ function contextText(){
   const yr = k => { const o = []; for(let y=0;y*12<N;y++){ const s = D.series[k].slice(y*12,y*12+12); o.push((1999+y)+': '+(s.reduce((a,b)=>a+b,0)/s.length).toFixed(2)); } return o.join(', '); };
   L.push(TEN[state.tenor].label + ' Euribor yearly averages (latest year partial): ' + yr(state.tenor));
   [state.tenor].forEach(k => L.push(`Market-implied ${TEN[k].label} Euribor (derived from the ECB yield curve of ${D.curveDate}; typical historical range in brackets): ` +
-    [6,12,24,36,60].map(h => { const o = outlook(k,h); return `in ${h} months ${o.v.toFixed(2)}% [${o.lo.toFixed(2)} to ${o.hi.toFixed(2)}]`; }).join('; ')));
+    [6,12,18,24].map(h => { const o = outlook(k,h); return `in ${h} months ${o.v.toFixed(2)}% [${o.lo.toFixed(2)} to ${o.hi.toFixed(2)}]`; }).join('; ')));
   L.push('Country selected: ' + $('country').selectedOptions[0].textContent + '. Local convention: ' + COUNTRY[state.country].note);
   L.push('Maturity selected on the page: ' + TEN[state.tenor].label);
+  if(D.bt) L.push('Back-test of this outlook method since ' + D.btFrom + ' (mean absolute error in percentage points, market path vs. assuming no change; band = share of outcomes inside the shaded range; hit = share of clear priced moves that happened): ' +
+    Object.keys(D.bt).map(t => TEN[t].label + ': ' + Object.keys(D.bt[t]).map(h => { const r = D.bt[t][h]; return `${h} months ahead market ${r.market} vs no change ${r.nochange}, band ${Math.round(r.band*100)}%, hit ${Math.round(r.hit*100)}%`; }).join('; ')).join(' | ') +
+    '. Beyond two years the method did worse than no change, so the page shows two years only. Large misses came from unpriced shocks such as 2008.');
   L.push('Loan entered in the calculator (may be the example figures): ' + (loan ? JSON.stringify(loan) : 'none'));
   return L.join('\n');
 }

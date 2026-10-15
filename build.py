@@ -86,6 +86,15 @@ data = {
     "est": est,
 }
 
+# Back-test summary (from backtest.py) for the "How accurate is this?" panel
+bt_file = HERE / "backtest" / "results.json"
+if bt_file.exists():
+    bt = json.loads(bt_file.read_text(encoding="utf-8"))["tenors"]
+    data["bt"] = {k: {h: {"market": v[h]["market"]["mae"], "nochange": v[h]["nochange"]["mae"],
+                          "band": v[h]["band_coverage"], "hit": v[h]["direction"]["hit_rate"]}
+                      for h in ("6", "12", "24")} for k, v in bt.items()}
+    data["btFrom"] = bt["m12"]["6"]["first"]
+
 page = (HERE / "template.html").read_text(encoding="utf-8").replace(
     "/*__DATA__*/null", json.dumps(data, separators=(",", ":")))
 (HERE / "korkovahti.html").write_text(page, encoding="utf-8")
